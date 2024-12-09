@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Function Name="DepositSettingAPI">
+	<Function Name="Product">
+		<Setting Key="API_Dep_3rdProductCustStatusSel" SpName="API_Dep_3rdProductCustStatusSel" DbName="DBCUST.CustDB.asv_cust" />
+	</Function>
+</Function>
