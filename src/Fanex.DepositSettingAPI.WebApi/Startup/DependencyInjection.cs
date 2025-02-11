@@ -28,7 +28,8 @@ public static class DependencyInjection
         services
             .AddHealthChecks()
             .AddCheck<ServerHealthCheck>("Server")
-            .AddCheck<MemoryHealthCheck>("Memory");
+            .AddCheck<MemoryHealthCheck>("Memory")
+            .AddCheck<VaultHealthCheck>("Vault");
 
         services.AddHttpContextAccessor();
         services.AddExceptionHandler<BadHttpRequestExceptionHandler>();

@@ -1,6 +1,7 @@
 ﻿namespace Fanex.DepositSettingAPI.Infrastructure;
 
 using Application.Services;
+using DbSettingConfig;
 using Domain.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,9 +19,12 @@ public static class DependencyInjection
 
         services.AddMemoryCache(options => { options.TrackStatistics = true; });
 
+        services.TryAddSingleton<IShardDbInfoAccessor, ShardDbInfoAccessor>();
         // repositories
 
         services.TryAddScoped<IProductRepository, ProductRepository>();
+        services.TryAddScoped<IBetSettingRepository, BetSettingRepository>();
+        services.TryAddScoped<IServerDbConfigRepository, ServerDbConfigRepository>();
         services.TryAddScoped<ICacheProvider, CacheProvider>();
         services.TryAddSingleton<IDbFactory, DbFactory>();
 

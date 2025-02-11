@@ -13,4 +13,12 @@ public static class ParamMapper
             ProductId = query.ProductId
         };
     }
+
+    public static GetBetSettingParam MapGetBetSettingParam(GetBetSettingQuery query)
+    {
+        return new GetBetSettingParam
+        {
+            AgentId = query.AgentId
+        };
+    }
 }

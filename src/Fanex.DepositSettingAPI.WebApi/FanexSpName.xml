@@ -4,4 +4,10 @@
 	<Function Name="Product">
 		<Setting Key="API_Dep_3rdProductCustStatusSel" SpName="API_Dep_3rdProductCustStatusSel" DbName="DBCUST.CustDB.asv_cust" />
 	</Function>
+	<Function Name="BetSetting">
+		<Setting Key="API_AgentBetSetting_Sel" SpName="API_AgentBetSetting_Sel" DbName="ShardCustDB.CustDB.asv_cust" />
+	</Function>
+	<Function Name="DBServerConfig">
+		<Setting Key="Acc_Dep_ServerDBConfigSelByCust" SpName="Acc_Dep_ServerDBConfigSelByCust" DbName="DBGLOB.GlobCustDB.asv_cust" />
+	</Function>
 </Function>
