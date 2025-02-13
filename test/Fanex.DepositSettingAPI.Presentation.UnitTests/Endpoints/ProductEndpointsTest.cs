@@ -40,7 +40,7 @@ public class ProductEndpointsTest
     }
 
     [Fact]
-    public async Task GetTicketInformation_Should_ReturnFailure()
+    public async Task GetProductStatus_Should_ReturnFailure()
     {
         // Arrange
         int productId = _fixture.Create<int>();

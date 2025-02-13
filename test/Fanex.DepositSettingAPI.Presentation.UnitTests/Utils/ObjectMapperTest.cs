@@ -10,16 +10,29 @@ public class ObjectMapperTest
     private readonly Fixture _fixture = new();
 
     [Fact]
-    public void MapNewPlayerCommand_Should_MapPropertiesCorrectly()
+    public void MapGetProductStatusQuery_Should_MapPropertiesCorrectly()
     {
         // Arrange
         var request = _fixture.Create<ProductStatusRequest>();
 
         // Action
-        var getTicketInformationQuery = ObjectMapper.MapGetProductStatusQuery(request);
+        var getProductStatusQuery = ObjectMapper.MapGetProductStatusQuery(request);
 
         // Assert
-        getTicketInformationQuery.AgentId.Should().Be(request.AgentId);
-        getTicketInformationQuery.ProductId.Should().Be(request.ProductId);
+        getProductStatusQuery.AgentId.Should().Be(request.AgentId);
+        getProductStatusQuery.ProductId.Should().Be(request.ProductId);
+    }
+
+    [Fact]
+    public void MapGetBetSettingQuery_Should_MapPropertiesCorrectly()
+    {
+        // Arrange
+        var request = _fixture.Create<BetSettingRequest>();
+
+        // Action
+        var getBetSettingQuery = ObjectMapper.MapGetBetSettingQuery(request);
+
+        // Assert
+        getBetSettingQuery.AgentId.Should().Be(request.AgentId);
     }
 }
