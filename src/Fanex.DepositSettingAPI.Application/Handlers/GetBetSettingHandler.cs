@@ -2,44 +2,37 @@
 
 using Domain.Entities;
 using Domain.Errors;
+using Domain.Options;
 using Domain.Params;
 using Domain.Repositories;
 using Domain.Results;
 using Logging;
-using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using Queries;
 using Utils;
 
 public class GetBetSettingHandler(
+    IOptions<AppSetting> appSetting,
     ILogger logger,
     IHttpContextAccessor httpContextAccessor,
     IServerDbConfigRepository serverDbConfigRepository,
     IBetSettingRepository betSettingRepository)
-    : IRequestHandler<GetBetSettingQuery, ServiceResult<BetSetting>>
+    : BaseHandler<GetBetSettingQuery, ServiceResult<BetSetting>>(logger)
 {
-    public async Task<ServiceResult<BetSetting>> Handle(GetBetSettingQuery query, CancellationToken cancellationToken)
+    protected override async Task<ServiceResult<BetSetting>> DoWork(GetBetSettingQuery query, CancellationToken cancellationToken)
     {
-        try
+        var serverDbConfig = await serverDbConfigRepository.GetServerDbConfigByAgentIdAsync(query.AgentId);
+        if (serverDbConfig is null)
         {
-            var serverDbConfig = await serverDbConfigRepository.GetServerDbConfigByAgentIdAsync(query.AgentId);
-            if (serverDbConfig is null)
-            {
-                return ServiceResult<BetSetting>.Failure(BetSettingErrors.InvalidAgentId);
-            }
-
-            ServerDbConfigUtils.SetServerDbConfigToHttpContext(serverDbConfig, httpContextAccessor);
-
-            GetBetSettingParam param = ParamMapper.MapGetBetSettingParam(query);
-            ServiceResult<BetSetting> result = await betSettingRepository.GetBetSettingAsync(param);
-
-            return result;
+            return ServiceResult<BetSetting>.Failure(BetSettingErrors.InvalidAgentId);
         }
-        catch (Exception exception)
-        {
-            await logger.ErrorAsync(ErrorMessageUtils.GenerateMessage(exception));
 
-            return ServiceResult<BetSetting>.Failure(ServiceErrors.SystemError);
-        }
+        ServerDbConfigUtils.SetServerDbConfigToHttpContext(serverDbConfig, httpContextAccessor);
+
+        GetBetSettingParam param = ParamMapper.MapGetBetSettingParam(query, appSetting.Value);
+        ServiceResult<BetSetting> result = await betSettingRepository.GetBetSettingAsync(param);
+
+        return result;
     }
 }

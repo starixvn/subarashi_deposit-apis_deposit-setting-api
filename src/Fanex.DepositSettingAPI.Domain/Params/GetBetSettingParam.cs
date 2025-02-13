@@ -4,5 +4,5 @@ public class GetBetSettingParam
 {
     public int AgentId { get; set; }
 
-    public short SettingStatus { get; set; }
+    public byte SettingStatus { get; set; }
 }

@@ -3,6 +3,7 @@
 using System.Reflection;
 using Application;
 using Configurations;
+using Domain.Options;
 using ExceptionHandler;
 using HealthChecks;
 using Infrastructure;
@@ -12,6 +13,9 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddDependencyInjection(this IServiceCollection services, IConfiguration configuration)
     {
+        services.Configure<AppSetting>(configuration.GetSection(AppSetting.SettingName));
+        services.Configure<SentrySetting>(configuration.GetSection(SentrySetting.SettingName));
+
         services
             .AddApplication()
             .AddInfrastructure(configuration)

@@ -8,7 +8,6 @@ using Domain.Params;
 using Domain.Repositories;
 using Domain.Results;
 using Logging;
-using MediatR;
 using Queries;
 using Services;
 using Utils;
@@ -17,7 +16,7 @@ public class GetProductStatusHandler(
     ILogger logger,
     IProductRepository productRepository,
     ICacheProvider cacheProvider)
-    : IRequestHandler<GetProductStatusQuery, ServiceResult<ProductStatus>>
+    : BaseHandler<GetProductStatusQuery, ServiceResult<ProductStatus>>(logger)
 {
     private const int Timeout = 500;
 
@@ -32,27 +31,18 @@ public class GetProductStatusHandler(
         Products.CO
     ];
 
-    public async Task<ServiceResult<ProductStatus>> Handle(GetProductStatusQuery query, CancellationToken cancellationToken)
+    protected override async Task<ServiceResult<ProductStatus>> DoWork(GetProductStatusQuery query, CancellationToken cancellationToken)
     {
-        try
+        if (!IsSupportProduct(query.ProductId))
         {
-            if (!IsSupportProduct(query.ProductId))
-            {
-                return ServiceResult<ProductStatus>.Failure(ProductStatusErrors.NotSupported);
-            }
-
-            GetProductStatusParam param = ParamMapper.MapGetProductStatusParam(query);
-            string cacheKey = CacheKeys.ProductStatus(query);
-            ServiceResult<ProductStatus> result = await GetResult(param, cacheKey);
-
-            return result;
+            return ServiceResult<ProductStatus>.Failure(ProductStatusErrors.NotSupported);
         }
-        catch (Exception exception)
-        {
-            await logger.ErrorAsync(ErrorMessageUtils.GenerateMessage(exception));
 
-            return ServiceResult<ProductStatus>.Failure(ServiceErrors.SystemError);
-        }
+        GetProductStatusParam param = ParamMapper.MapGetProductStatusParam(query);
+        string cacheKey = CacheKeys.ProductStatus(query);
+        ServiceResult<ProductStatus> result = await GetResult(param, cacheKey);
+
+        return result;
     }
 
     private async Task<ServiceResult<ProductStatus>> GetResult(GetProductStatusParam param, string cacheKey)

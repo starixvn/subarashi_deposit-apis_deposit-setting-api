@@ -14,7 +14,7 @@ using Utils;
 
 public class BetSettingEndpoints : IEndpoints
 {
-    public string GroupName => "BetSetting";
+    public string GroupName => "BetSettings";
 
     public void Map(IEndpointRouteBuilder app)
     {
