@@ -2,7 +2,7 @@
 
 public static class SettingStatus
 {
-    public static byte ExcludeDataTest = 0;
+    public const byte ExcludeDataTest = 0;
 
-    public static byte IncludeDataTest = 1;
+    public const byte IncludeDataTest = 1;
 }

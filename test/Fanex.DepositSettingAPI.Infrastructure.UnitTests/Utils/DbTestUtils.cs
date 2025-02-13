@@ -7,39 +7,39 @@ using NSubstitute.Core;
 
 public static class DbTestUtils
 {
-    public static void MapReaderData(IDataReader reader, object readerDataMapping, Dictionary<string, string>? columnMapping = null)
+    public static void MapReaderData(IDataReader reader, object readerDataMapping, Dictionary<string, string> columnMapping = null)
     {
         var func = CreateMappingFunc(readerDataMapping, columnMapping);
 
         reader[Arg.Any<string>()].Returns(func);
     }
 
-    private static Func<CallInfo, object> CreateMappingFunc(object mappingData, Dictionary<string, string>? columnMapping)
+    private static Func<CallInfo, object> CreateMappingFunc(object mappingData, Dictionary<string, string> columnMapping)
     {
         switch (mappingData)
         {
             case IEnumerable:
+            {
+                var index = 0;
+                HashSet<string> paramSet = [];
+
+                return x =>
                 {
-                    var index = 0;
-                    HashSet<string> paramSet = [];
+                    var paramName = x.ArgAt<string>(0);
 
-                    return x =>
+                    if (!paramSet.Add(paramName))
                     {
-                        var paramName = x.ArgAt<string>(0);
+                        index++;
+                        paramSet.Clear();
+                        paramSet.Add(paramName);
+                    }
 
-                        if (!paramSet.Add(paramName))
-                        {
-                            index++;
-                            paramSet.Clear();
-                            paramSet.Add(paramName);
-                        }
+                    var elementMappingData = ((IEnumerable<object>)mappingData).ToArray()[index];
+                    var dictionary = ToDictionary(elementMappingData, columnMapping);
 
-                        var elementMappingData = ((IEnumerable<object>)mappingData).ToArray()[index];
-                        var dictionary = ToDictionary(elementMappingData, columnMapping);
-
-                        return dictionary.TryGetValue(paramName, out var value) ? value : string.Empty;
-                    };
-                }
+                    return dictionary.TryGetValue(paramName, out var value) ? value : string.Empty;
+                };
+            }
 
             default:
                 return x =>
@@ -51,7 +51,7 @@ public static class DbTestUtils
         }
     }
 
-    private static IDictionary<string, object> ToDictionary(object data, Dictionary<string, string>? columnMapping)
+    private static IDictionary<string, object> ToDictionary(object data, Dictionary<string, string> columnMapping)
     {
         if (data is IDictionary)
         {

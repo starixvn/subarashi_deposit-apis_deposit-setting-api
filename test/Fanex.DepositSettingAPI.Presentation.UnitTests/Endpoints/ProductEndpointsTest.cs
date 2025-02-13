@@ -34,7 +34,7 @@ public class ProductEndpointsTest
 
         // Assert
         okResult.StatusCode.Should().Be(200);
-        okResult.Value.ErrorCode.Should().Be(0);
+        okResult.Value!.ErrorCode.Should().Be(0);
         okResult.Value.ErrorMessage.Should().BeEmpty();
         okResult.Value.Result.Should().Be(productStatus);
     }
@@ -55,7 +55,7 @@ public class ProductEndpointsTest
 
         // Assert
         okResult.StatusCode.Should().Be(200);
-        okResult.Value.ErrorCode.Should().Be(ServiceErrors.SystemError.Code);
+        okResult.Value!.ErrorCode.Should().Be(ServiceErrors.SystemError.Code);
         okResult.Value.ErrorMessage.Should().Be(ServiceErrors.SystemError.Message);
         okResult.Value.Result.Should().BeNull();
     }
