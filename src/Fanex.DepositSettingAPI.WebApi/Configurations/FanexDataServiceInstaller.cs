@@ -2,6 +2,8 @@
 
 using Data;
 using Data.SqlServer;
+using Data.Vault;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 public class FanexDataServiceInstaller : IServiceInstaller
 {
@@ -12,5 +14,7 @@ public class FanexDataServiceInstaller : IServiceInstaller
             .WithSqlServer(configuration)
             .UseDefaultDbSettingProvider("~/FanexSpName.xml")
             .Run();
+
+        services.TryAddSingleton<VaultDbAliasService, VaultDbAliasServiceImp>();
     }
 }

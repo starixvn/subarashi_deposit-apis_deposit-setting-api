@@ -26,6 +26,13 @@ public class RunLoadTest(ITestOutputHelper testOutputHelper)
         ExecuteCommand(runCommand);
     }
 
+    [Fact(Skip = Skip)]
+    public void RunGetBetSettingTest()
+    {
+        var runCommand = string.Format(RunK6Command, "BetSettingApi/GetBetSettingTest.js");
+        ExecuteCommand(runCommand);
+    }
+
     private void ExecuteCommand(string command)
     {
         var process = new Process

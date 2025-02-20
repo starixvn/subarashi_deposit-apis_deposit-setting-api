@@ -13,4 +13,12 @@ public static class ObjectMapper
             AgentId = request.AgentId
         };
     }
+
+    public static GetBetSettingQuery MapGetBetSettingQuery(BetSettingRequest request)
+    {
+        return new GetBetSettingQuery
+        {
+            AgentId = request.AgentId
+        };
+    }
 }
