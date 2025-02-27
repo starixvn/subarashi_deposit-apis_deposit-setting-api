@@ -8,7 +8,6 @@ using Domain.Repositories;
 using FluentAssertions;
 using Infrastructure.Repositories;
 using NSubstitute;
-using Utils;
 
 [Collection("DbFactoryFixture")]
 public class ServerDbConfigRepositoryTest : RepositoryBaseTest
@@ -64,7 +63,7 @@ public class ServerDbConfigRepositoryTest : RepositoryBaseTest
         var agentId = Fixture.Create<int>();
         var data = Fixture.Create<ServerDbConfig>();
         _dataReader.Read().Returns(true);
-        DbTestUtils.MapReaderData(_dataReader, data, ColumnMapping);
+        MapReaderData(_dataReader, data, ColumnMapping);
 
         // Action
         var result = await _serverDbConfigRepository.GetServerDbConfigByAgentIdAsync(agentId);
