@@ -159,7 +159,7 @@ public class CacheProviderTest : IDisposable
     private void SetupCacheData(string key, object data, Func<bool> func = null)
     {
         _memoryCache
-            .TryGetValue(Arg.Is<object>(k => k.ToString() == key), out _)
+            .TryGetValue(key, out _)
             .Returns(x =>
             {
                 x[1] = data;
@@ -170,7 +170,7 @@ public class CacheProviderTest : IDisposable
     private void SetupNoCacheData(string key)
     {
         _memoryCache
-            .TryGetValue(Arg.Is<object>(k => k.ToString() == key), out _)
+            .TryGetValue(key, out _)
             .Returns(false);
     }
 }

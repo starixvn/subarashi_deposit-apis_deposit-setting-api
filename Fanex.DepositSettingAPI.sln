@@ -31,9 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.DepositSettingAPI.Loa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LoadTests", "LoadTests", "{C31F33DC-1978-409C-8901-A7625D86A37F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.DepositSettingAPI.Presentation.UnitTests", "test\Fanex.DepositSettingAPI.Presentation.UnitTests\Fanex.DepositSettingAPI.Presentation.UnitTests.csproj", "{84D3F4FD-97F8-4FDF-86BC-BCBF9EBFF5BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.DepositSettingAPI.Presentation.UnitTests", "test\Fanex.DepositSettingAPI.Presentation.UnitTests\Fanex.DepositSettingAPI.Presentation.UnitTests.csproj", "{84D3F4FD-97F8-4FDF-86BC-BCBF9EBFF5BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.DepositSettingAPI.WebApi.UnitTests", "test\Fanex.DepositSettingAPI.WebApi.UnitTests\Fanex.DepositSettingAPI.WebApi.UnitTests.csproj", "{9E886A79-9E68-46D5-A22D-7B7BB0623407}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanex.DepositSettingAPI.WebApi.UnitTests", "test\Fanex.DepositSettingAPI.WebApi.UnitTests\Fanex.DepositSettingAPI.WebApi.UnitTests.csproj", "{9E886A79-9E68-46D5-A22D-7B7BB0623407}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.DepositSettingAPI.Domain.UnitTests", "test\Fanex.DepositSettingAPI.Domain.UnitTests\Fanex.DepositSettingAPI.Domain.UnitTests.csproj", "{27D5C45D-6709-46C6-AB1E-3C1377D8CCC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{9E886A79-9E68-46D5-A22D-7B7BB0623407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E886A79-9E68-46D5-A22D-7B7BB0623407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E886A79-9E68-46D5-A22D-7B7BB0623407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27D5C45D-6709-46C6-AB1E-3C1377D8CCC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27D5C45D-6709-46C6-AB1E-3C1377D8CCC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27D5C45D-6709-46C6-AB1E-3C1377D8CCC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27D5C45D-6709-46C6-AB1E-3C1377D8CCC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{C31F33DC-1978-409C-8901-A7625D86A37F} = {84A9C120-0F67-4824-B484-1E59F8C29238}
 		{84D3F4FD-97F8-4FDF-86BC-BCBF9EBFF5BA} = {6BAB5577-72F6-4C64-B7E2-8E0CAFC1F514}
 		{9E886A79-9E68-46D5-A22D-7B7BB0623407} = {6BAB5577-72F6-4C64-B7E2-8E0CAFC1F514}
+		{27D5C45D-6709-46C6-AB1E-3C1377D8CCC1} = {6BAB5577-72F6-4C64-B7E2-8E0CAFC1F514}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2DCBFC3A-41DE-43C2-AE51-70E51FE7E34F}
